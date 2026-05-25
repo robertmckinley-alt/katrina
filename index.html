@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Katrina's Genetic Story — A Friendly Guide to Her DNA</title>
+<style>
+  :root{
+    --bg:#f6f4fb; --card:#ffffff; --ink:#2a2940; --soft:#6f6c8a;
+    --line:#e7e3f2; --purple:#7b6cf6; --purple-d:#5a49d6;
+    --green:#1aa18d; --amber:#d98a26; --blue:#3f8fd0; --rose:#e26d8a;
+    --green-bg:#e4f6f2; --amber-bg:#fcefdc; --blue-bg:#e6f1fb; --rose-bg:#fde9ef; --purple-bg:#ece9fd;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65; font-size:17px;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 20px 80px;}
+  a{color:var(--purple-d);}
+
+  header{
+    background:linear-gradient(135deg,#7b6cf6,#9b7af0 55%,#e26d8a);
+    color:#fff; padding:54px 24px 60px; text-align:center;
+  }
+  header .kicker{text-transform:uppercase; letter-spacing:.18em; font-size:12.5px; opacity:.9; font-weight:700;}
+  header h1{font-size:34px; margin:14px 0 8px; line-height:1.25;}
+  header p.sub{font-size:17px; max-width:560px; margin:8px auto 0; opacity:.95;}
+  .tagcard{
+    display:inline-flex; gap:18px; flex-wrap:wrap; justify-content:center;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3);
+    border-radius:14px; padding:12px 20px; margin-top:22px; font-size:13.5px;
+  }
+  .tagcard b{display:block; font-size:15px;}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:24px 26px; margin:20px 0; box-shadow:0 6px 22px rgba(60,40,120,.05);
+  }
+  .card h3{margin:0 0 6px; font-size:21px;}
+  .card h4{margin:18px 0 6px; font-size:17px;}
+
+  .note{
+    background:#fffbef; border:1px solid #f0e2b8;
+    border-left:6px solid var(--amber); border-radius:12px;
+    padding:16px 20px; margin:24px 0; font-size:15.5px;
+  }
+  .note b{color:#9a6a16;}
+
+  .toc{background:var(--purple-bg); border:1px solid #d9d3fb; border-radius:16px; padding:18px 22px; margin:26px 0;}
+  .toc h3{margin:0 0 10px; font-size:16px; color:var(--purple-d); text-transform:uppercase; letter-spacing:.06em;}
+  .toc ol{margin:0; padding-left:22px; columns:2; column-gap:30px;}
+  .toc li{margin:4px 0; break-inside:avoid;}
+  .toc a{text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+
+  section{margin-top:46px;}
+  .sechead{display:flex; align-items:center; gap:14px; margin-bottom:6px;}
+  .secnum{
+    flex:none; width:42px; height:42px; border-radius:12px;
+    background:var(--purple); color:#fff; font-weight:800; font-size:19px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sechead h2{margin:0; font-size:25px;}
+
+  .key{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0;}
+  .badge{
+    display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700;
+    padding:5px 12px; border-radius:999px;
+  }
+  .dot{width:11px; height:11px; border-radius:50%; flex:none;}
+  .b-green{background:var(--green-bg); color:#0f6b5d;}
+  .b-amber{background:var(--amber-bg); color:#9a5e12;}
+  .b-blue{background:var(--blue-bg); color:#205a8a;}
+  .d-green{background:var(--green);}
+  .d-amber{background:var(--amber);}
+  .d-blue{background:var(--blue);}
+
+  .gene{border-left:6px solid var(--purple);}
+  .gene.g-green{border-left-color:var(--green);}
+  .gene.g-amber{border-left-color:var(--amber);}
+  .gene.g-blue{border-left-color:var(--blue);}
+  .gene .toprow{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;}
+  .gene .gname{font-size:13px; font-weight:800; letter-spacing:.05em; color:var(--soft); text-transform:uppercase;}
+  .gene h3{margin:2px 0 0;}
+
+  .geno{display:flex; gap:6px; align-items:center; margin:12px 0 4px; flex-wrap:wrap;}
+  .geno .lbl{font-size:13px; color:var(--soft); margin-right:4px;}
+  .tile{
+    width:34px; height:34px; border-radius:9px; font-weight:800; font-size:18px;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .t-A{background:#27a567;} .t-T{background:#e0563f;}
+  .t-C{background:#3f8fd0;} .t-G{background:#d98a26;}
+  .resultword{font-size:14px; color:var(--soft); margin-left:8px;}
+
+  .callout{
+    background:var(--rose-bg); border:1px solid #f6cdd9; border-radius:13px;
+    padding:14px 18px; margin:14px 0 4px; font-size:15.5px;
+  }
+  .callout .ctag{
+    display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--rose); margin-bottom:3px;
+  }
+  .callout.calm{background:var(--green-bg); border-color:#bfe7df;}
+  .callout.calm .ctag{color:#0f6b5d;}
+
+  .glance{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:10px; margin-top:8px;}
+  .gtile{
+    background:#faf9fe; border:1px solid var(--line); border-radius:11px;
+    padding:10px 12px; font-size:13.5px; border-left:5px solid var(--green);
+  }
+  .gtile.amber{border-left-color:var(--amber);}
+  .gtile.blue{border-left-color:var(--blue);}
+  .gtile b{display:block; font-size:14px;}
+  .gtile span{color:var(--soft);}
+
+  .bar{height:30px; border-radius:8px; display:flex; overflow:hidden; margin:14px 0 6px; font-size:12.5px; font-weight:800; color:#fff;}
+  .bar div{display:flex; align-items:center; justify-content:center; text-align:center; padding:0 4px;}
+
+  figure{margin:18px 0;}
+  figure svg{width:100%; height:auto; display:block; background:#fcfbff; border:1px solid var(--line); border-radius:14px;}
+  figcaption{font-size:13.5px; color:var(--soft); margin-top:8px; text-align:center;}
+
+  .scale{display:flex; gap:3px; margin:14px 0 6px;}
+  .scale .seg{
+    flex:1; text-align:center; padding:8px 2px; border-radius:6px;
+    font-weight:800; font-size:14px; color:#fff;
+  }
+  .scale .seg small{display:block; font-weight:600; font-size:9.5px; opacity:.95; line-height:1.2;}
+  .scale .band{outline:3px solid var(--ink); outline-offset:1px; position:relative; z-index:1;}
+
+  ul.clean{padding-left:0; list-style:none; margin:10px 0;}
+  ul.clean li{padding:8px 0 8px 30px; position:relative; border-bottom:1px dashed var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:""; position:absolute; left:4px; top:15px;
+    width:13px; height:13px; border-radius:50%; background:var(--purple);
+  }
+  li.li-amber::before{background:var(--amber);}
+  li.li-green::before{background:var(--green);}
+  li.li-blue::before{background:var(--blue);}
+
+  details{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:6px 20px; margin:16px 0;}
+  details summary{cursor:pointer; font-weight:800; padding:12px 0; font-size:16px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:8px 0 16px;}
+  th,td{text-align:left; padding:8px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--soft); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em;}
+  code{background:#f0eefb; padding:1px 6px; border-radius:5px; font-size:13px;}
+
+  .lead{font-size:18px;}
+  footer{margin-top:50px; padding-top:22px; border-top:1px solid var(--line); font-size:13.5px; color:var(--soft); text-align:center;}
+  @media (max-width:560px){
+    header h1{font-size:26px;} .toc ol{columns:1;} .sechead h2{font-size:21px;}
+    body{font-size:16px;} .wrap{padding:0 14px 60px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">A Personal Genetics Guide</div>
+  <h1>Katrina's Genetic Story</h1>
+  <p class="sub">A friendly, plain-English tour through Katrina McKinley's DNA — what it says, what it doesn't, and how it fits with her health history.</p>
+  <div class="tagcard">
+    <div><b>631,455</b>DNA markers read</div>
+    <div><b>40+</b>genes explained</div>
+    <div><b>5.5 years</b>of health history</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="note">
+    <b>Read this first.</b> This guide is for <b>learning and curiosity</b> — it is <b>not a medical test or a diagnosis</b>.
+    It reads the "raw data" file from a 23andMe test. Raw data is fun and useful, but it can occasionally misread a spot,
+    and almost everything about a person depends on hundreds of genes <i>plus</i> diet, environment, and plain luck.
+    Think of this as a conversation-starter. Any real questions belong with a doctor or a genetic counsellor
+    (a specialist who helps people understand DNA results).
+  </div>
+
+  <div class="toc">
+    <h3>What's inside</h3>
+    <ol>
+      <li><a href="#dna101">DNA in 2 minutes</a></li>
+      <li><a href="#howto">How to read this guide</a></li>
+      <li><a href="#glance">Katrina's genes at a glance</a></li>
+      <li><a href="#comt">The headline gene: COMT</a></li>
+      <li><a href="#mthfr">Folate &amp; the MTHFR gene</a></li>
+      <li><a href="#migraine">The genetics of migraine</a></li>
+      <li><a href="#hormones">Hormones &amp; estrogen</a></li>
+      <li><a href="#iron">Iron</a></li>
+      <li><a href="#meds">Medicines &amp; caffeine</a></li>
+      <li><a href="#reassure">Heart &amp; brain — good news</a></li>
+      <li><a href="#vitamins">Vitamins</a></li>
+      <li><a href="#traits">Food &amp; body traits</a></li>
+      <li><a href="#issues">Things worth being aware of</a></li>
+      <li><a href="#limits">What this can't tell you</a></li>
+      <li><a href="#glossary">Glossary &amp; full data table</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <section id="dna101">
+    <div class="sechead"><div class="secnum">1</div><h2>DNA in 2 minutes</h2></div>
+    <div class="card">
+      <p class="lead">Before the genes, here's the whole idea in a few sentences.</p>
+      <p><b>DNA</b> is a giant instruction book tucked inside almost every cell of the body. It is written with just four
+      letters — <b>A, T, C and G</b>. A <b>gene</b> is one "recipe" in that book (a recipe for building or running some
+      tiny part of you).</p>
+      <p>You carry <b>two copies</b> of most genes — one from each parent. A <b>SNP</b> (say it "snip") is a single spot
+      where people's letters can differ — like one word being spelled slightly differently between two copies of the same
+      book. Those tiny spelling differences are what make every person unique, and a handful of them gently nudge how the
+      body works.</p>
+      <p>Because there are two copies, each result is shown as <b>two letters</b> — one per copy:</p>
+      <ul class="clean">
+        <li class="li-green"><b>Homozygous</b> means both letters match (same-same), like <code>A A</code>.</li>
+        <li class="li-blue"><b>Heterozygous</b> means the two letters differ (a mix), like <code>A G</code>.</li>
+      </ul>
+      <p>That's it. The rest of this guide is just translating Katrina's letters into plain English.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="howto">
+    <div class="sechead"><div class="secnum">2</div><h2>How to read this guide</h2></div>
+    <div class="card">
+      <p>Every gene below gets a colour. The colour is <b>not</b> a grade — it just tells you how to think about it.</p>
+      <div class="key">
+        <span class="badge b-green"><span class="dot d-green"></span>Typical &amp; reassuring</span>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+        <span class="badge b-blue"><span class="dot d-blue"></span>Just a fun trait</span>
+      </div>
+      <ul class="clean">
+        <li class="li-green"><b>Typical &amp; reassuring</b> — Katrina's result is the common one, or the version that carries no added risk. Most of her results land here.</li>
+        <li class="li-amber"><b>Worth knowing</b> — a common variation that's useful context, often connected to her migraines, hormones or iron. These are <i>not</i> diseases.</li>
+        <li class="li-blue"><b>Just a fun trait</b> — harmless differences like taste, earwax or eye colour.</li>
+      </ul>
+      <h4>About the data itself</h4>
+      <p>This report is built from a <b>23andMe v5 raw data file</b> — about 631,000 marked spots spread across all 23
+      pairs of chromosomes. It's good-quality data, but it is research-grade, not clinical-grade. A few markers we looked
+      for weren't included in this particular file, and that's normal — we'll note those as we go.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="glance">
+    <div class="sechead"><div class="secnum">3</div><h2>Katrina's genes at a glance</h2></div>
+    <div class="card">
+      <p>Here's the big picture. The good news up front: <b>most of Katrina's results are typical and reassuring.</b>
+      A handful are "worth knowing" — and interestingly, several of those line up neatly with the things her own
+      health diary describes.</p>
+      <div class="bar">
+        <div style="width:60%;background:var(--green);">Reassuring · ~24</div>
+        <div style="width:23%;background:var(--amber);">Worth knowing · ~9</div>
+        <div style="width:17%;background:var(--blue);">Traits · ~9</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--soft);margin-top:4px;">A rough split of the 40+ markers in this guide.</p>
+
+      <h4>The quick map</h4>
+      <div class="glance">
+        <div class="gtile amber"><b>COMT</b><span>Slow type — stress &amp; pain "volume"</span></div>
+        <div class="gtile amber"><b>MTHFR</b><span>Two common variants — folate</span></div>
+        <div class="gtile amber"><b>TMPRSS6</b><span>One lower-iron version</span></div>
+        <div class="gtile amber"><b>Vitamin D genes</b><span>Mild low-D nudge</span></div>
+        <div class="gtile amber"><b>Lactose (LCT)</b><span>Leans lactose-intolerant</span></div>
+        <div class="gtile"><b>Factor V Leiden</b><span>Not carried — good</span></div>
+        <div class="gtile"><b>APOE</b><span>e3/e3 — neutral, most common</span></div>
+        <div class="gtile"><b>HFE (iron overload)</b><span>Both copies normal</span></div>
+        <div class="gtile"><b>Medicine genes</b><span>Normal processing</span></div>
+        <div class="gtile blue"><b>Caffeine (CYP1A2)</b><span>Fast metabolizer</span></div>
+        <div class="gtile blue"><b>Earwax / odor</b><span>Wet earwax type</span></div>
+        <div class="gtile blue"><b>Norovirus</b><span>Naturally resistant</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="comt">
+    <div class="sechead"><div class="secnum">4</div><h2>The headline gene: COMT</h2></div>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · COMT &nbsp;|&nbsp; marker rs4680</div>
+          <h3>The body's "clean-up crew" for stress chemicals</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">Her result:</span>
+        <span class="tile t-A">A</span><span class="tile t-A">A</span>
+        <span class="resultword">"Met / Met" — the slow-working version</span>
+      </div>
+      <p>COMT is an <b>enzyme</b> — a tiny worker — whose job is to <b>clear away</b> certain "fast" chemicals once
+      they've done their job. The chemicals it sweeps up include <b>adrenaline and noradrenaline</b> (the racing-heart,
+      sweaty, "wired" chemicals), <b>dopamine</b>, and the <b>leftover pieces the body makes when it breaks down
+      estrogen</b>.</p>
+      <p>Katrina has the <b>slow-working version</b> of COMT (both copies read "A", nicknamed <i>Met/Met</i>). About
+      <b>1 in 4 people</b> have this. It is not a bad thing — people with the slow type often have excellent focus and
+      memory when life is calm. But it means stress chemicals and estrogen leftovers <b>hang around a little longer</b>
+      before they're cleared.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial,sans-serif">
+          <text x="380" y="28" text-anchor="middle" font-size="15" font-weight="800" fill="#2a2940">How COMT works — and why "slow" matters</text>
+          <rect x="30" y="58" width="180" height="46" rx="10" fill="#fde9ef" stroke="#f6cdd9"/>
+          <text x="120" y="80" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b3415f">Stress chemicals</text>
+          <text x="120" y="96" text-anchor="middle" font-size="11" fill="#b3415f">adrenaline · noradrenaline</text>
+          <rect x="30" y="118" width="180" height="46" rx="10" fill="#ece9fd" stroke="#d9d3fb"/>
+          <text x="120" y="140" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5a49d6">Estrogen left-overs</text>
+          <text x="120" y="156" text-anchor="middle" font-size="11" fill="#5a49d6">from breaking down estrogen</text>
+          <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 Z" fill="#c9c4dd"/></marker>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 Z" fill="#1aa18d"/></marker></defs>
+          <path d="M210 81 L300 100" stroke="#c9c4dd" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+          <path d="M210 141 L300 122" stroke="#c9c4dd" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+          <rect x="300" y="78" width="170" height="66" rx="14" fill="#d98a26"/>
+          <text x="385" y="104" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">COMT enzyme</text>
+          <text x="385" y="124" text-anchor="middle" font-size="11.5" fill="#fff8ec">Katrina's = SLOW type</text>
+          <circle cx="385" cy="180" r="22" fill="#fff" stroke="#d98a26" stroke-width="3"/>
+          <line x1="385" y1="180" x2="385" y2="165" stroke="#d98a26" stroke-width="3" stroke-linecap="round"/>
+          <line x1="385" y1="180" x2="397" y2="186" stroke="#d98a26" stroke-width="3" stroke-linecap="round"/>
+          <text x="385" y="222" text-anchor="middle" font-size="11" fill="#9a5e12">takes a bit longer</text>
+          <path d="M470 111 L560 111" stroke="#1aa18d" stroke-width="3" fill="none" marker-end="url(#ar2)"/>
+          <rect x="560" y="86" width="175" height="50" rx="10" fill="#e4f6f2" stroke="#bfe7df"/>
+          <text x="647" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f6b5d">Cleared away</text>
+          <text x="647" y="124" text-anchor="middle" font-size="11" fill="#0f6b5d">...just more slowly for her</text>
+        </svg>
+        <figcaption>Because Katrina's COMT runs slowly, stress chemicals and estrogen by-products linger a little longer than average.</figcaption>
+      </figure>
+
+      <div class="callout">
+        <span class="ctag">How this fits her history</span>
+        This lines up strikingly with Katrina's own 5.5-year diary. Again and again she describes mornings around
+        <b>8:30–9:30</b> with a <b>racing or pounding heart, sweating, feeling "wired," shaky and anxious</b> — almost
+        exactly the pattern you'd expect when adrenaline-type chemicals are slow to switch off. Her genes did not
+        <i>cause</i> those mornings, but the slow COMT may help explain why her body <b>feels them so strongly</b>.
+        Slow COMT is also one of the more consistently studied genes in <b>pain sensitivity and migraine</b> — like a
+        "volume knob" turned up a notch for both stress chemistry and pain.
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="mthfr">
+    <div class="sechead"><div class="secnum">5</div><h2>Folate &amp; the MTHFR gene</h2></div>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · MTHFR &nbsp;|&nbsp; markers rs1801133 + rs1801131</div>
+          <h3>A gene that helps the body use folate (vitamin B9)</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">C677T:</span>
+        <span class="tile t-A">A</span><span class="tile t-G">G</span>
+        <span class="resultword">one changed copy (heterozygous)</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">A1298C:</span>
+        <span class="tile t-G">G</span><span class="tile t-T">T</span>
+        <span class="resultword">one changed copy (heterozygous)</span>
+      </div>
+      <p>MTHFR is a famous little gene. Its job is one specific step in turning the <b>folate</b> you eat (vitamin B9,
+      from leafy greens, beans and so on) into the <b>active form</b> the body actually uses. That active folate powers
+      <b>methylation</b> — a constant background process that helps run DNA, brain chemicals, and the clean-up of a
+      substance called homocysteine.</p>
+      <p>MTHFR has two very well-known variations, and Katrina carries <b>one copy of each</b> (called "combined
+      heterozygous"). This is common — very roughly <b>1 in 5 people</b>. The practical effect: her MTHFR enzyme runs at
+      a <b>gentler pace</b> — somewhere around 60–70% of full speed. For most people that matters very little, <i>as long
+      as they get enough folate and B vitamins</i>.</p>
+
+      <figure>
+        <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial,sans-serif">
+          <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="#2a2940">The MTHFR step, simplified</text>
+          <defs><marker id="m1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#c9c4dd"/></marker></defs>
+          <rect x="24" y="62" width="150" height="58" rx="11" fill="#e4f6f2" stroke="#bfe7df"/>
+          <text x="99" y="86" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f6b5d">Folate from food</text>
+          <text x="99" y="103" text-anchor="middle" font-size="10.5" fill="#0f6b5d">greens · beans · etc.</text>
+          <path d="M174 91 L240 91" stroke="#c9c4dd" stroke-width="3" marker-end="url(#m1)"/>
+          <rect x="240" y="58" width="170" height="66" rx="13" fill="#d98a26"/>
+          <text x="325" y="84" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">MTHFR step</text>
+          <text x="325" y="104" text-anchor="middle" font-size="10.5" fill="#fff8ec">Katrina's: ~60–70% speed</text>
+          <path d="M410 91 L476 91" stroke="#c9c4dd" stroke-width="3" marker-end="url(#m1)"/>
+          <rect x="476" y="62" width="160" height="58" rx="11" fill="#ece9fd" stroke="#d9d3fb"/>
+          <text x="556" y="86" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5a49d6">Active folate</text>
+          <text x="556" y="103" text-anchor="middle" font-size="10.5" fill="#5a49d6">the usable form</text>
+          <path d="M556 120 L556 150" stroke="#c9c4dd" stroke-width="3" marker-end="url(#m1)"/>
+          <text x="556" y="172" text-anchor="middle" font-size="11.5" fill="#6f6c8a">powers methylation · brain chemicals · homocysteine clean-up</text>
+        </svg>
+        <figcaption>MTHFR is one step in a chain. Katrina's runs at a gentler pace — usually a non-issue with good folate intake.</figcaption>
+      </figure>
+
+      <div class="callout">
+        <span class="ctag">How this fits her history</span>
+        MTHFR is also one of the genes researchers have studied in <b>migraine — especially migraine with aura</b> (the
+        kind with extra sensations like numbness or vertigo, which appear in Katrina's notes). Carrying just one copy of
+        each variant is only a <b>small</b> nudge, not a cause. It's mentioned here because B vitamins (B2/riboflavin,
+        B6, B12 and folate) are an active and hopeful area of migraine research.
+      </div>
+      <p style="font-size:14.5px;color:var(--soft);">Two related "helper" genes — <b>MTR</b> and <b>MTRR</b>, which work
+      alongside MTHFR using vitamin B12 — were also checked. MTR is the common type; MTRR is a mix. Nothing unusual.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="migraine">
+    <div class="sechead"><div class="secnum">6</div><h2>The genetics of migraine</h2></div>
+    <div class="card">
+      <p class="lead">This is the part Katrina's family will care about most — so it's worth being very clear and very honest.</p>
+      <p>Migraine is what scientists call <b>polygenic</b>. That means it is <b>not one gene</b>. It is the combined
+      whisper of <b>100+ genes</b>, each adding a tiny amount, mixed together with hormones, sleep, stress, weather and
+      more. There is no single "migraine gene" to find.</p>
+      <p>We looked at four of the most-studied migraine-linked genes — <b>TRPM8, LRP1, PRDM16 and MTDH</b>. Katrina
+      carries the common version at some and the migraine-associated version at others — a completely <b>ordinary
+      mix</b> that millions of people share. None of these "causes" her migraines.</p>
+      <div class="callout calm">
+        <span class="ctag">The honest takeaway</span>
+        The genes most meaningfully connected to <i>her</i> picture are the two we already met — <b>COMT</b> (pain and
+        stress chemistry) and <b>MTHFR</b>. But the loudest signal of all isn't in her DNA file at all — it's in her
+        <b>own diary</b>. Across 5.5 years she repeatedly ties her flare-ups to her <b>hormones</b>, and even tracked her
+        blood estrogen against her symptoms. That makes her history the single best "test" anyone could have. The way to
+        read it: <b>genes set the stage; hormones, environment and daily life direct the play.</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="hormones">
+    <div class="sechead"><div class="secnum">7</div><h2>Hormones &amp; estrogen</h2></div>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Genes · ESR1 + CYP1B1 (+ COMT) &nbsp;|&nbsp; estrogen receptor &amp; processing</div>
+          <h3>How sensitively the body "hears" estrogen</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">ESR1 (rs2234693):</span>
+        <span class="tile t-C">C</span><span class="tile t-T">T</span>
+        <span class="resultword">mixed</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">ESR1 (rs9340799):</span>
+        <span class="tile t-A">A</span><span class="tile t-G">G</span>
+        <span class="resultword">mixed</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">CYP1B1 (rs1056836):</span>
+        <span class="tile t-C">C</span><span class="tile t-G">G</span>
+        <span class="resultword">mixed</span>
+      </div>
+      <p><b>ESR1</b> is the gene for the <b>estrogen receptor</b> — think of it as the "antenna" that cells use to hear
+      estrogen's message. <b>CYP1B1</b> helps <b>break estrogen down</b> afterwards. And from Section 4, <b>COMT</b>
+      sweeps up the leftovers from that breakdown.</p>
+      <p>Katrina has <b>mixed (heterozygous) versions</b> of the ESR1 and CYP1B1 markers we checked. On their own these
+      are unremarkable — lots of people carry them. But put the three together — the antenna (ESR1), the breakdown
+      (CYP1B1) and the slow clean-up (COMT) — and you get a body that may be <b>especially tuned-in to estrogen's ups
+      and downs</b>. ESR1 variations in particular have been studied in <b>hormone-related migraine</b>.</p>
+      <p style="font-size:14px;color:var(--soft);">Note: <b>CYP19A1</b> (the "aromatase" gene — the very target of the
+      estrogen-lowering medicines in her history) wasn't covered in this data file, so we can't report it.</p>
+
+      <div class="callout">
+        <span class="ctag">How this fits her history</span>
+        Katrina's diary is full of lines like <i>"feels like estrogen spiking"</i> and <i>"estrogen going up?"</i>, and
+        she logged hundreds of blood-hormone tests. Her hardest years were when estrogen was <b>high and swinging</b>;
+        her steadier years came once it was brought <b>low and stable</b>. The chart below tells that story.
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial,sans-serif">
+          <text x="380" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="#2a2940">Katrina's blood estradiol over time (selected readings from her diary)</text>
+          <rect x="70" y="40" width="349" height="230" fill="#fde9ef" opacity="0.55"/>
+          <rect x="419" y="40" width="301" height="230" fill="#e4f6f2" opacity="0.6"/>
+          <text x="244" y="56" text-anchor="middle" font-size="11.5" font-weight="800" fill="#b3415f">HIGH &amp; SWINGING</text>
+          <text x="569" y="56" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0f6b5d">LOW &amp; STEADY</text>
+          <g stroke="#e7e3f2" stroke-width="1">
+            <line x1="70" y1="270" x2="720" y2="270"/>
+            <line x1="70" y1="206" x2="720" y2="206"/>
+            <line x1="70" y1="142" x2="720" y2="142"/>
+            <line x1="70" y1="78" x2="720" y2="78"/>
+          </g>
+          <g font-size="10.5" fill="#9a96b3" text-anchor="end">
+            <text x="62" y="274">0</text><text x="62" y="210">50</text>
+            <text x="62" y="146">100</text><text x="62" y="82">150</text>
+          </g>
+          <text x="22" y="160" font-size="11" fill="#6f6c8a" transform="rotate(-90 22 160)" text-anchor="middle">estradiol level</text>
+          <g font-size="10.5" fill="#9a96b3" text-anchor="middle">
+            <text x="70" y="288">2019</text><text x="188" y="288">2020</text><text x="306" y="288">2021</text>
+            <text x="425" y="288">2022</text><text x="543" y="288">2023</text><text x="661" y="288">2024</text>
+          </g>
+          <polyline fill="none" stroke="#7b6cf6" stroke-width="3"
+            points="70,94 123,82 182,109 214,89 243,63 280,159 351,184 379,250 399,264 419,60 539,246 588,251 654,259 706,236"/>
+          <g fill="#5a49d6">
+            <circle cx="70" cy="94" r="4.5"/><circle cx="123" cy="82" r="4.5"/><circle cx="182" cy="109" r="4.5"/>
+            <circle cx="214" cy="89" r="4.5"/><circle cx="243" cy="63" r="4.5"/><circle cx="280" cy="159" r="4.5"/>
+            <circle cx="351" cy="184" r="4.5"/><circle cx="379" cy="250" r="4.5"/><circle cx="399" cy="264" r="4.5"/>
+            <circle cx="419" cy="60" r="4.5"/><circle cx="539" cy="246" r="4.5"/><circle cx="588" cy="251" r="4.5"/>
+            <circle cx="654" cy="259" r="4.5"/><circle cx="706" cy="236" r="4.5"/>
+          </g>
+          <text x="395" y="308" text-anchor="middle" font-size="11" fill="#6f6c8a">Each dot is one of Katrina's recorded lab readings.</text>
+        </svg>
+        <figcaption>A sample of Katrina's own estradiol readings. The early years were high and erratic; once her care
+        plan brought estrogen low and steady, the swings calmed down — and so did her worst spells.</figcaption>
+      </figure>
+
+      <h4>Her headache intensity scale</h4>
+      <p>Katrina graded every day on a 0–10 scale (this scale is from her own diary). Most of her days landed in the
+      <b>5–7 band</b> — outlined below — with harder spells reaching 8.</p>
+      <div class="scale">
+        <div class="seg" style="background:#3cb371;">0<small>none</small></div>
+        <div class="seg" style="background:#74bf52;">1<small>tiny</small></div>
+        <div class="seg" style="background:#a6c83e;">2<small>minor</small></div>
+        <div class="seg" style="background:#cdc62f;">3<small>distract</small></div>
+        <div class="seg" style="background:#e3b52a;">4<small>nagging</small></div>
+        <div class="seg band" style="background:#e89322;">5<small>home-bound</small></div>
+        <div class="seg band" style="background:#e2701f;">6<small>lying down</small></div>
+        <div class="seg band" style="background:#d8491f;">7<small>can't focus</small></div>
+        <div class="seg" style="background:#bf2f2f;">8<small>bed-bound</small></div>
+        <div class="seg" style="background:#8f2330;">9<small>severe</small></div>
+        <div class="seg" style="background:#5c1822;">10<small>extreme</small></div>
+      </div>
+      <figcaption style="text-align:left;">Outlined band = where most of Katrina's days fell. Over the 5.5 years her
+      typical day eased from frequent 7s toward a steadier 5–6, alongside her hormone changes and modern migraine
+      treatments.</figcaption>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="iron">
+    <div class="sechead"><div class="secnum">8</div><h2>Iron</h2></div>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Genes · TMPRSS6 + HFE &nbsp;|&nbsp; iron balance</div>
+          <h3>How the body holds onto iron</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">TMPRSS6 (rs855791):</span>
+        <span class="tile t-A">A</span><span class="tile t-G">G</span>
+        <span class="resultword">mixed</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">HFE C282Y:</span>
+        <span class="tile t-G">G</span><span class="tile t-G">G</span>
+        <span class="resultword">normal</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">HFE H63D:</span>
+        <span class="tile t-C">C</span><span class="tile t-C">C</span>
+        <span class="resultword">normal</span>
+      </div>
+      <p><b>HFE</b> is the gene behind <i>hemochromatosis</i> — a condition of holding onto <b>too much</b> iron. Both of
+      Katrina's HFE markers are the <b>normal</b> version, so there's no sign of iron-overload risk here. That's
+      reassuring.</p>
+      <p><b>TMPRSS6</b> helps fine-tune iron levels. Katrina has a <b>mixed result</b> — one of each version. One of
+      those versions is linked in research to <b>slightly lower iron levels</b> on average. This is a common result and
+      only a gentle nudge, but it's an interesting puzzle piece.</p>
+      <div class="callout">
+        <span class="ctag">How this fits her history</span>
+        Katrina's diary records <b>many iron infusions</b> and repeatedly low <b>ferritin</b> (an iron-storage measure —
+        noted as low as the teens and 20s). In other words she runs <b>low</b> on iron, not high — and her genes point
+        in exactly that direction: normal HFE (no overload) plus one lower-iron TMPRSS6 copy. Iron is one of the
+        easiest things to keep an eye on with a simple blood test.
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section id="meds">
+    <div class="sechead"><div class="secnum">9</div><h2>Medicines &amp; caffeine</h2></div>
+    <div class="card gene g-green">
+      <div class="toprow">
+        <div>
+          <div class="gname">Genes · CYP2C9 · CYP2C19 · VKORC1</div>
+          <h3>How her body processes common medicines</h3>
+        </div>
+        <span class="badge b-green"><span class="dot d-green"></span>Typical &amp; reassuring</span>
+      </div>
+      <p>A family of liver genes (the "CYP" genes) decides how quickly the body breaks medicines down. Katrina's results
+      here are <b>reassuringly ordinary</b>:</p>
+      <ul class="clean">
+        <li class="li-green"><b>CYP2C9 — normal.</b> No slow-processing variants. This is the gene for anti-inflammatory
+          medicines like celecoxib (Celebrex) and ibuprofen — both of which appear in her history. She processes them
+          at a typical rate.</li>
+        <li class="li-green"><b>CYP2C19 — normal.</b> No rapid or poor-metabolizer variants found.</li>
+        <li class="li-green"><b>VKORC1 — normal.</b> If the blood-thinner warfarin were ever needed, she'd be expected
+          to respond to a standard dose.</li>
+      </ul>
+      <p style="font-size:14px;color:var(--soft);">One gene, <b>CYP2D6</b>, is genuinely hard to read from raw data and
+      its main marker wasn't in this file — so it can't be assessed here.</p>
+    </div>
+
+    <div class="card gene g-blue">
+      <div class="toprow">
+        <div>
+          <div class="gname">Genes · CYP1A2 + ADORA2A &nbsp;|&nbsp; caffeine</div>
+          <h3>Caffeine: a fast metabolizer</h3>
+        </div>
+        <span class="badge b-blue"><span class="dot d-blue"></span>Just a fun trait</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">CYP1A2 (rs762551):</span>
+        <span class="tile t-A">A</span><span class="tile t-A">A</span>
+        <span class="resultword">fast caffeine metabolizer</span>
+      </div>
+      <p>Katrina's CYP1A2 result is the <b>fast</b> version — her body tends to <b>clear caffeine quickly</b>. And at the
+      ADORA2A marker (linked to caffeine jitters and sleep) she has the version <b>less</b> associated with caffeine
+      anxiety. A small but relevant detail: some of the migraine medicines in her history contain caffeine.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="reassure">
+    <div class="sechead"><div class="secnum">10</div><h2>Heart &amp; brain — the good news</h2></div>
+    <div class="card gene g-green">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · APOE &nbsp;|&nbsp; markers rs429358 + rs7412</div>
+          <h3>APOE — e3/e3, the most common type</h3>
+        </div>
+        <span class="badge b-green"><span class="dot d-green"></span>Typical &amp; reassuring</span>
+      </div>
+      <p>APOE is a gene people often ask about because it's studied in heart health and in Alzheimer's. It comes in three
+      flavours — e2, e3 and e4. Katrina is <b>e3/e3</b> — the <b>most common pairing</b> (around
+      6 in 10 people), considered the <b>neutral, baseline</b> result. It is neither the higher-risk e4 nor the
+      e2 type. A genuinely reassuring result.</p>
+    </div>
+    <div class="card gene g-green">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · F5 &nbsp;|&nbsp; marker rs6025</div>
+          <h3>Factor V Leiden — not carried</h3>
+        </div>
+        <span class="badge b-green"><span class="dot d-green"></span>Typical &amp; reassuring</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">Her result:</span>
+        <span class="tile t-C">C</span><span class="tile t-C">C</span>
+        <span class="resultword">normal — variant not present</span>
+      </div>
+      <p>"Factor V Leiden" is a well-known change in a blood-clotting gene. Katrina's result is the <b>normal</b> version
+      on both copies — she <b>does not carry it</b>. The prothrombin (F2) marker that's sometimes paired with it wasn't
+      included in this file. Overall, the major clotting variant we could check is clear.</p>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="vitamins">
+    <div class="sechead"><div class="secnum">11</div><h2>Vitamins</h2></div>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Genes · GC · CYP2R1 · DHCR7 &nbsp;|&nbsp; vitamin D</div>
+          <h3>Vitamin D — a mild "runs a bit low" nudge</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <p>Three genes influence how easily the body makes and carries <b>vitamin D</b>. Katrina has the lower-D version at
+      a couple of them and the typical version at another — adding up to a <b>mild tendency toward lower vitamin D</b>.
+      This is extremely common, easy to check with a simple blood test, and easy to support through sunlight, diet or a
+      supplement if a doctor suggests one.</p>
+    </div>
+    <div class="card gene g-green">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · FUT2 &nbsp;|&nbsp; vitamin B12</div>
+          <h3>Vitamin B12 — nothing of concern</h3>
+        </div>
+        <span class="badge b-green"><span class="dot d-green"></span>Typical &amp; reassuring</span>
+      </div>
+      <p>The B12-related marker we checked shows nothing worrying — and Katrina's "non-secretor" status (see the next
+      section) is, if anything, gently associated with <i>higher</i> B12 in the blood.</p>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section id="traits">
+    <div class="sechead"><div class="secnum">12</div><h2>Food &amp; body traits</h2></div>
+    <p style="margin-top:0;color:var(--soft);">The fun part — harmless quirks written into Katrina's DNA.</p>
+    <div class="card gene g-amber">
+      <div class="toprow">
+        <div>
+          <div class="gname">Gene · LCT / MCM6 &nbsp;|&nbsp; marker rs4988235</div>
+          <h3>Lactose — leans toward intolerance</h3>
+        </div>
+        <span class="badge b-amber"><span class="dot d-amber"></span>Worth knowing</span>
+      </div>
+      <div class="geno">
+        <span class="lbl">Her result:</span>
+        <span class="tile t-G">G</span><span class="tile t-G">G</span>
+        <span class="resultword">lactose "non-persistent" type</span>
+      </div>
+      <p>Most babies digest milk easily; some people keep that ability strongly into adulthood and some don't.
+      Katrina's result is the <b>non-persistent</b> type — genetically she <b>leans toward being lactose intolerant</b>
+      as an adult. (Bodies vary a lot — plenty of people with this result still enjoy <i>some</i> dairy comfortably.)</p>
+      <div class="callout">
+        <span class="ctag">A gentle observation</span>
+        Katrina's diary mentions digestive upset — diarrhea and stomach trouble — fairly often. There can be many
+        reasons for that, but given this genetic lean, <b>dairy</b> could be one ordinary thing worth gently paying
+        attention to. Purely an observation to be curious about, not a medical conclusion.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">More everyday traits</h3>
+      <div class="glance">
+        <div class="gtile blue"><b>Eye colour</b><span>rs12913832 mixed — most likely brown, with a real chance of hazel or green.</span></div>
+        <div class="gtile blue"><b>Earwax &amp; body odor</b><span>"Wet" earwax type and typical body-odor genetics (the common European result).</span></div>
+        <div class="gtile blue"><b>Bitter taste</b><span>A "medium" taster — can detect bitter flavours, but they're not overwhelming.</span></div>
+        <div class="gtile blue"><b>Muscle type</b><span>ACTN3 mixed — a blend of "power/sprint" and "endurance" muscle. A true all-rounder.</span></div>
+        <div class="gtile blue"><b>Alcohol</b><span>Standard processing, no "flush" reaction genes.</span></div>
+        <div class="gtile blue"><b>Skin pigmentation</b><span>The lighter-skin variant typical of European ancestry.</span></div>
+        <div class="gtile"><b>Norovirus resistance</b><span>A "non-secretor" — naturally resistant to the most common strain of the winter "stomach flu". A nice one to have!</span></div>
+        <div class="gtile blue"><b>Dopamine signalling</b><span>A common variation in a reward-related gene (DRD2/ANKK1) — a soft, much-debated trait.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section id="issues">
+    <div class="sechead"><div class="secnum">13</div><h2>Things worth being aware of</h2></div>
+    <div class="card">
+      <p>You asked for "any potential issues." Here is the honest, calm summary. <b>None of these are emergencies</b> —
+      they are simply <i>context</i>. Each comes with its reassuring side.</p>
+
+      <h4 style="color:var(--amber);">Worth keeping in mind</h4>
+      <ul class="clean">
+        <li class="li-amber"><b>Combined MTHFR variants.</b> Common. The practical takeaway is just getting enough
+          folate and B vitamins through food.</li>
+        <li class="li-amber"><b>Slow COMT type.</b> Not a disease — it describes a turned-up sensitivity to stress
+          chemicals and pain, which fits her morning-symptom pattern.</li>
+        <li class="li-amber"><b>One lower-iron TMPRSS6 copy.</b> Fits her history of low iron and iron infusions. Iron
+          is easy to monitor with routine blood tests.</li>
+        <li class="li-amber"><b>Mild tendency to lower vitamin D.</b> Very common; easy to check and support.</li>
+        <li class="li-amber"><b>Lactose non-persistence.</b> Possible dairy sensitivity — worth gentle attention given
+          her digestive notes.</li>
+        <li class="li-amber"><b>Migraine.</b> Polygenic (many tiny genetic contributions) and, in Katrina's case, very
+          clearly tied to her hormones — as her own detailed records show.</li>
+      </ul>
+
+      <h4 style="color:var(--green);">Reassuring — checked and clear</h4>
+      <ul class="clean">
+        <li class="li-green"><b>Factor V Leiden:</b> not carried.</li>
+        <li class="li-green"><b>APOE:</b> the neutral e3/e3 type.</li>
+        <li class="li-green"><b>Hemochromatosis (HFE):</b> both copies normal — no iron-overload risk.</li>
+        <li class="li-green"><b>Medicine-processing genes (CYP2C9, CYP2C19, VKORC1):</b> all normal.</li>
+      </ul>
+
+      <div class="note" style="margin-top:18px;">
+        <b>A friendly reminder.</b> This guide is educational. If anything here sparks a question, the best next step is
+        a chat with a doctor or a <b>genetic counsellor</b> — they can look at the full picture, order proper clinical
+        tests where useful, and give advice tailored to Katrina.
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section id="limits">
+    <div class="sechead"><div class="secnum">14</div><h2>What this guide can't tell you</h2></div>
+    <div class="card">
+      <ul class="clean">
+        <li class="li-blue">It is <b>not a diagnosis</b> and not a clinical test.</li>
+        <li class="li-blue">Raw 23andMe data can occasionally <b>misread</b> a spot.</li>
+        <li class="li-blue">It does <b>not reliably detect rare inherited conditions</b> — a proper clinical or carrier test does that.</li>
+        <li class="li-blue">It cannot <b>predict the future</b>. Genes are a tendency, not a destiny.</li>
+        <li class="li-blue">A few markers simply <b>weren't in this file</b> (for example the prothrombin clotting marker, CYP2D6, and the aromatase gene CYP19A1).</li>
+        <li class="li-blue">For real <b>ancestry breakdown</b>, the official 23andMe ancestry report does that properly — this guide only touches a couple of trait markers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section id="glossary">
+    <div class="sechead"><div class="secnum">15</div><h2>Glossary &amp; full data table</h2></div>
+    <div class="card">
+      <h3>Quick glossary</h3>
+      <ul class="clean">
+        <li><b>DNA</b> — the four-letter (A,T,C,G) instruction book inside cells.</li>
+        <li><b>Gene</b> — one "recipe" in that book.</li>
+        <li><b>Chromosome</b> — a bundle of DNA; humans have 23 pairs.</li>
+        <li><b>SNP</b> ("snip") — a single spot where people's letters can differ.</li>
+        <li><b>Allele</b> — one version of a gene or SNP (you have two).</li>
+        <li><b>Genotype</b> — your specific pair of letters at a spot.</li>
+        <li><b>Homozygous / Heterozygous</b> — your two letters match / differ.</li>
+        <li><b>Enzyme</b> — a tiny protein "worker" that speeds up a body process.</li>
+        <li><b>Polygenic</b> — shaped by many genes together, each with a tiny effect.</li>
+        <li><b>Variant</b> — a less-common spelling of a SNP.</li>
+        <li><b>Methylation</b> — a constant background process that helps run DNA and brain chemistry.</li>
+      </ul>
+    </div>
+
+    <details>
+      <summary>Show the full data table (all 40+ markers)</summary>
+      <table>
+        <tr><th>Marker</th><th>Gene</th><th>Her result</th><th>Plain meaning</th></tr>
+        <tr><td>rs6025</td><td>F5</td><td>CC</td><td>Factor V Leiden — not carried</td></tr>
+        <tr><td>rs1799963</td><td>F2</td><td>not in file</td><td>Prothrombin marker — not covered</td></tr>
+        <tr><td>rs2036914</td><td>F11</td><td>CC</td><td>Minor clotting-factor marker</td></tr>
+        <tr><td>rs1801133</td><td>MTHFR</td><td>AG</td><td>C677T — one changed copy</td></tr>
+        <tr><td>rs1801131</td><td>MTHFR</td><td>GT</td><td>A1298C — one changed copy</td></tr>
+        <tr><td>rs1805087</td><td>MTR</td><td>AA</td><td>B12 pathway — common type</td></tr>
+        <tr><td>rs1801394</td><td>MTRR</td><td>AG</td><td>B12 recycling — mixed</td></tr>
+        <tr><td>rs429358 + rs7412</td><td>APOE</td><td>TT + CC</td><td>APOE e3/e3 — neutral, most common</td></tr>
+        <tr><td>rs4680</td><td>COMT</td><td>AA</td><td>Met/Met — slow-working version</td></tr>
+        <tr><td>rs6265</td><td>BDNF</td><td>CC</td><td>Val/Val — common type</td></tr>
+        <tr><td>rs1800497</td><td>ANKK1/DRD2</td><td>AA</td><td>Reward-gene variation (soft trait)</td></tr>
+        <tr><td>rs10166942</td><td>TRPM8</td><td>TT</td><td>Migraine gene — common version</td></tr>
+        <tr><td>rs11172113</td><td>LRP1</td><td>CC</td><td>Migraine gene — one studied version</td></tr>
+        <tr><td>rs2651899</td><td>PRDM16</td><td>CC</td><td>Migraine gene — one studied version</td></tr>
+        <tr><td>rs1835740</td><td>MTDH</td><td>CC</td><td>Migraine-with-aura gene — common version</td></tr>
+        <tr><td>rs762551</td><td>CYP1A2</td><td>AA</td><td>Fast caffeine metabolizer</td></tr>
+        <tr><td>rs5751876</td><td>ADORA2A</td><td>CC</td><td>Lower caffeine-anxiety tendency</td></tr>
+        <tr><td>rs671</td><td>ALDH2</td><td>GG</td><td>No alcohol-flush variant</td></tr>
+        <tr><td>rs1229984</td><td>ADH1B</td><td>CC</td><td>Standard alcohol metabolism</td></tr>
+        <tr><td>rs4988235</td><td>LCT/MCM6</td><td>GG</td><td>Leans lactose-intolerant in adulthood</td></tr>
+        <tr><td>rs1800562</td><td>HFE</td><td>GG</td><td>C282Y — normal (no iron overload)</td></tr>
+        <tr><td>rs1799945</td><td>HFE</td><td>CC</td><td>H63D — normal</td></tr>
+        <tr><td>rs855791</td><td>TMPRSS6</td><td>AG</td><td>Mixed — one lower-iron version</td></tr>
+        <tr><td>rs9923231</td><td>VKORC1</td><td>CC</td><td>Normal warfarin response</td></tr>
+        <tr><td>rs1799853</td><td>CYP2C9</td><td>CC</td><td>*2 absent — normal</td></tr>
+        <tr><td>rs1057910</td><td>CYP2C9</td><td>AA</td><td>*3 absent — normal</td></tr>
+        <tr><td>rs4244285</td><td>CYP2C19</td><td>GG</td><td>*2 absent — normal</td></tr>
+        <tr><td>rs12248560</td><td>CYP2C19</td><td>CC</td><td>*17 absent — normal</td></tr>
+        <tr><td>rs3892097</td><td>CYP2D6</td><td>not in file</td><td>Not assessable from this data</td></tr>
+        <tr><td>rs2282679</td><td>GC</td><td>GT</td><td>One lower-vitamin-D version</td></tr>
+        <tr><td>rs12785878</td><td>DHCR7</td><td>TT</td><td>Vitamin D — common type</td></tr>
+        <tr><td>rs10741657</td><td>CYP2R1</td><td>AG</td><td>One lower-vitamin-D version</td></tr>
+        <tr><td>rs602662</td><td>FUT2</td><td>AA</td><td>B12 absorption marker</td></tr>
+        <tr><td>rs2234693</td><td>ESR1</td><td>CT</td><td>Estrogen receptor — mixed</td></tr>
+        <tr><td>rs9340799</td><td>ESR1</td><td>AG</td><td>Estrogen receptor — mixed</td></tr>
+        <tr><td>rs10046</td><td>CYP19A1</td><td>not in file</td><td>Aromatase gene — not covered</td></tr>
+        <tr><td>rs1056836</td><td>CYP1B1</td><td>CG</td><td>Estrogen breakdown — mixed</td></tr>
+        <tr><td>rs12913832</td><td>HERC2</td><td>AG</td><td>Eye colour — likely brown/hazel</td></tr>
+        <tr><td>rs1815739</td><td>ACTN3</td><td>CT</td><td>Mixed power/endurance muscle</td></tr>
+        <tr><td>rs17822931</td><td>ABCC11</td><td>CT</td><td>Wet earwax type</td></tr>
+        <tr><td>rs713598</td><td>TAS2R38</td><td>CG</td><td>Medium bitter taster</td></tr>
+        <tr><td>rs1426654</td><td>SLC24A5</td><td>AA</td><td>Lighter-skin pigment variant</td></tr>
+        <tr><td>rs601338</td><td>FUT2</td><td>AA</td><td>Non-secretor — norovirus resistant</td></tr>
+      </table>
+      <p style="font-size:13px;color:var(--soft);">Results read directly from the 23andMe v5 raw data file
+      (human reference build 37). "Not in file" means that specific marker was not included in this download.</p>
+    </details>
+  </section>
+
+  <footer>
+    <p><b>Katrina's Genetic Story</b> · Prepared 25 May 2026<br>
+    Built from a 23andMe v5 raw data file and a 5.5-year personal pain &amp; hormone diary.<br>
+    For learning and curiosity only — not medical advice, not a diagnosis. Please bring any questions to a doctor or genetic counsellor.</p>
+  </footer>
+
+</div>
+</body>
+</html>
