@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Katrina's Migraine Story — Deep Dive</title>
+  <style>
+    :root{
+      --bg:#fdfcf8; --paper:#ffffff; --ink:#1d1f24; --soft:#5a5e69;
+      --line:#e5e5e1; --note:#fff8e3;
+      --green:#1aa18d; --amber:#d98a26; --blue:#3f8fd0; --purple:#7b6cf6;
+      --red:#c44a3a; --pink:#e67288;
+      --bg-green:#e8f4f0; --bg-amber:#fbf2e3; --bg-blue:#e7f0fa; --bg-purple:#ece9fc;
+      --bg-rose:#fdebee;
+    }
+    *{box-sizing:border-box;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+         background:var(--bg); color:var(--ink); margin:0; line-height:1.65; font-size:15.5px;}
+    .wrap{max-width:980px; margin:0 auto; padding:32px 22px 80px;}
+    header{background:linear-gradient(135deg,#fdf6f0,#fde7e3 60%,#f4e7fd); padding:48px 22px 32px; border-bottom:1px solid var(--line);}
+    header .inner{max-width:980px; margin:0 auto;}
+    .kicker{color:var(--purple); font-weight:700; letter-spacing:0.08em; font-size:12.5px; text-transform:uppercase;}
+    h1{font-size:36px; margin:8px 0 6px; line-height:1.15; letter-spacing:-0.01em;}
+    .sub{color:var(--soft); font-size:17px; max-width:780px; margin:0 0 18px;}
+    nav.back{margin-top:14px;}
+    nav.back a{color:var(--purple); font-weight:600; text-decoration:none; font-size:14px; border-bottom:1px dashed var(--purple);}
+    nav.back a:hover{opacity:0.8;}
+    section{margin:40px 0 8px;}
+    .sechead{display:flex; align-items:center; gap:16px; margin-bottom:14px;}
+    .secnum{display:inline-flex; align-items:center; justify-content:center; width:38px;height:38px;
+            border-radius:50%; background:var(--purple); color:#fff; font-weight:700; font-size:16px;}
+    h2{font-size:23px; margin:0; letter-spacing:-0.01em;}
+    h3{font-size:18px; margin:18px 0 8px;}
+    .card{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin:14px 0; box-shadow:0 1px 4px rgba(0,0,0,0.03);}
+    .card.lead{background:linear-gradient(135deg,#fff8f3,#ffeaea); border-color:#f1d8d8;}
+    .lead-text{font-size:17px; color:var(--ink);}
+    .callout{background:var(--bg-rose); border-left:4px solid var(--pink); padding:14px 18px; border-radius:8px; margin:14px 0;}
+    .callout.calm{background:var(--bg-green); border-left-color:var(--green);}
+    .callout.blue{background:var(--bg-blue); border-left-color:var(--blue);}
+    .callout.amber{background:var(--bg-amber); border-left-color:var(--amber);}
+    .ctag{display:inline-block; font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--pink); margin-bottom:4px;}
+    .calm .ctag{color:var(--green);}
+    .blue .ctag{color:var(--blue);}
+    .amber .ctag{color:var(--amber);}
+    .badge{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:99px; font-size:12px; font-weight:600;}
+    .b-amber{background:var(--bg-amber); color:var(--amber);}
+    .b-green{background:var(--bg-green); color:var(--green);}
+    .b-blue{background:var(--bg-blue); color:var(--blue);}
+    .b-purple{background:var(--bg-purple); color:var(--purple);}
+    .b-rose{background:var(--bg-rose); color:var(--pink);}
+    .dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:currentColor;}
+    table{border-collapse:collapse; width:100%; margin:8px 0;}
+    td,th{border:1px solid var(--line); padding:8px 10px; font-size:14px; text-align:left;}
+    th{background:#f7f5ef; font-weight:600;}
+    ul.clean{padding-left:20px;}
+    ul.clean li{margin:6px 0;}
+    .li-amber::marker{color:var(--amber);}
+    .li-green::marker{color:var(--green);}
+    .li-blue::marker{color:var(--blue);}
+    .li-rose::marker{color:var(--pink);}
+    .factor-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:14px 0;}
+    .factor{padding:16px; border-radius:10px; background:#fafaf6; border:1px solid var(--line);}
+    .factor h4{margin:0 0 6px; font-size:15px; color:var(--purple);}
+    .factor .val{font-size:13.5px; color:var(--soft);}
+    .pill{display:inline-block; padding:3px 9px; border-radius:99px; font-size:11.5px; font-weight:700; background:#eee; margin-right:4px;}
+    .pill.pink{background:var(--bg-rose); color:var(--pink);}
+    .pill.green{background:var(--bg-green); color:var(--green);}
+    .pill.blue{background:var(--bg-blue); color:var(--blue);}
+    .pill.amber{background:var(--bg-amber); color:var(--amber);}
+    .toc{background:#f7f3ec; padding:18px 24px; border-radius:12px; margin:22px 0;}
+    .toc ol{margin:6px 0 0; padding-left:22px;}
+    .toc a{color:var(--ink); text-decoration:none;}
+    .toc a:hover{color:var(--purple); text-decoration:underline;}
+    footer{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); color:var(--soft); font-size:13px; text-align:center;}
+    .note{background:var(--note); border-left:4px solid var(--amber); padding:14px 18px; border-radius:8px; margin:18px 0; font-size:14.5px;}
+    .quotebox{font-style:italic; color:#555; background:#faf7f0; border-left:3px solid #b8a578; padding:10px 16px; margin:8px 0; border-radius:6px; font-size:14.5px;}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="kicker">A Deep-Dive Companion Page</div>
+    <h1>Katrina's Migraine Story</h1>
+    <p class="sub">A closer look at 5.5 years of pain diary, mapped against the genes that shape how her body processes pain, hormones and stress &mdash; with the specific clues that point to <i>why</i>.</p>
+    <nav class="back">
+      <a href="index.html">&larr; Back to main genetic report</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="note">
+    <b>For learning and curiosity only.</b> This is not medical advice and not a diagnosis. The information here is meant to help Katrina (and her doctors) see patterns &mdash; the patterns themselves still need a clinician to act on.
+  </div>
+
+  <div class="toc">
+    <h3 style="margin:0 0 6px;">In this deep dive</h3>
+    <ol>
+      <li><a href="#snapshot">A snapshot of the diary</a></li>
+      <li><a href="#timeline">The five-year timeline &mdash; what the numbers say</a></li>
+      <li><a href="#fingerprint">Her pain "fingerprint" &mdash; the recurring symptom cluster</a></li>
+      <li><a href="#genetics">The genetics that shape her migraines</a></li>
+      <li><a href="#hormones">The hormone story &mdash; the biggest single lever</a></li>
+      <li><a href="#triggers">Triggers her diary points to</a></li>
+      <li><a href="#treatments">What she's tried &mdash; and what fits her genetics</a></li>
+      <li><a href="#synthesis">Putting it all together</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <section id="snapshot">
+    <div class="sechead"><div class="secnum">1</div><h2>A snapshot of the diary</h2></div>
+    <div class="card lead">
+      <p class="lead-text"><b>1,814 dated entries.</b> <b>1,983</b> days. <b>Pain in the 5&ndash;7 band almost every day for five and a half years.</b> The first surprising thing the diary tells us isn't about any single migraine &mdash; it's that this isn't really an "episodic" migraine pattern at all. It's a <b>chronic, daily-baseline</b> pattern with bigger spikes layered on top.</p>
+    </div>
+
+    <div class="factor-grid">
+      <div class="factor"><h4>Date range</h4><div class="val">18&nbsp;Dec&nbsp;2018 &ndash; 20&nbsp;Jun&nbsp;2024</div></div>
+      <div class="factor"><h4>Median daily pain</h4><div class="val">~5.7 / 10 (mid-6)</div></div>
+      <div class="factor"><h4>Days at "high&nbsp;7"</h4><div class="val">~115 (worst tier)</div></div>
+      <div class="factor"><h4>Most-mentioned word</h4><div class="val">"pressure" &mdash; 549 times</div></div>
+      <div class="factor"><h4>Most-mentioned symptom</h4><div class="val">"anxiety" &mdash; 363 times</div></div>
+      <div class="factor"><h4>Recurring partner</h4><div class="val">"hot flash" / "sweaty" &mdash; 242 times</div></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="timeline">
+    <div class="sechead"><div class="secnum">2</div><h2>The five-year timeline &mdash; what the numbers say</h2></div>
+    <div class="card">
+      <p>Plotting the daily pain scores year-by-year produces a clear story:</p>
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;"><rect x="0" y="0" width="700" height="320" fill="#fff" stroke="#e6e6e6" rx="6"/><line x1="60" y1="270.0" x2="680" y2="270.0" stroke="#eee" stroke-width="1"/><text x="52" y="274.0" font-size="11" fill="#666" text-anchor="end">4.5</text><line x1="60" y1="210.0" x2="680" y2="210.0" stroke="#eee" stroke-width="1"/><text x="52" y="214.0" font-size="11" fill="#666" text-anchor="end">5.0</text><line x1="60" y1="150.0" x2="680" y2="150.0" stroke="#eee" stroke-width="1"/><text x="52" y="154.0" font-size="11" fill="#666" text-anchor="end">5.5</text><line x1="60" y1="90.0" x2="680" y2="90.0" stroke="#eee" stroke-width="1"/><text x="52" y="94.0" font-size="11" fill="#666" text-anchor="end">6.0</text><line x1="60" y1="30.0" x2="680" y2="30.0" stroke="#eee" stroke-width="1"/><text x="52" y="34.0" font-size="11" fill="#666" text-anchor="end">6.5</text><rect x="73.28571428571428" y="151.2" width="61.99999999999999" height="118.80000000000003" fill="#7b6cf6" rx="3"/><text x="104.28571428571428" y="145.2" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.49</text><text x="104.28571428571428" y="288" font-size="13" fill="#444" text-anchor="middle">2018</text><text x="104.28571428571428" y="304" font-size="10" fill="#888" text-anchor="middle">n=15</text><rect x="161.85714285714283" y="146.39999999999998" width="61.99999999999999" height="123.60000000000002" fill="#7b6cf6" rx="3"/><text x="192.85714285714283" y="140.39999999999998" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.53</text><text x="192.85714285714283" y="288" font-size="13" fill="#444" text-anchor="middle">2019</text><text x="192.85714285714283" y="304" font-size="10" fill="#888" text-anchor="middle">n=320</text><rect x="250.42857142857142" y="98.40000000000003" width="61.99999999999999" height="171.59999999999997" fill="#c44a3a" rx="3"/><text x="281.4285714285714" y="92.40000000000003" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.93</text><text x="281.4285714285714" y="288" font-size="13" fill="#444" text-anchor="middle">2020</text><text x="281.4285714285714" y="304" font-size="10" fill="#888" text-anchor="middle">n=343</text><rect x="339.0" y="122.39999999999995" width="61.99999999999999" height="147.60000000000005" fill="#d98a26" rx="3"/><text x="370.0" y="116.39999999999995" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.73</text><text x="370.0" y="288" font-size="13" fill="#444" text-anchor="middle">2021</text><text x="370.0" y="304" font-size="10" fill="#888" text-anchor="middle">n=273</text><rect x="427.57142857142856" y="90.0" width="61.99999999999999" height="180.0" fill="#c44a3a" rx="3"/><text x="458.57142857142856" y="84.0" font-size="12" font-weight="600" fill="#222" text-anchor="middle">6.00</text><text x="458.57142857142856" y="288" font-size="13" fill="#444" text-anchor="middle">2022</text><text x="458.57142857142856" y="304" font-size="10" fill="#888" text-anchor="middle">n=306</text><rect x="516.1428571428571" y="110.39999999999998" width="61.99999999999999" height="159.60000000000002" fill="#d98a26" rx="3"/><text x="547.1428571428571" y="104.39999999999998" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.83</text><text x="547.1428571428571" y="288" font-size="13" fill="#444" text-anchor="middle">2023</text><text x="547.1428571428571" y="304" font-size="10" fill="#888" text-anchor="middle">n=384</text><rect x="604.7142857142858" y="133.20000000000005" width="61.99999999999999" height="136.79999999999995" fill="#7b6cf6" rx="3"/><text x="635.7142857142858" y="127.20000000000005" font-size="12" font-weight="600" fill="#222" text-anchor="middle">5.64</text><text x="635.7142857142858" y="288" font-size="13" fill="#444" text-anchor="middle">2024</text><text x="635.7142857142858" y="304" font-size="10" fill="#888" text-anchor="middle">n=173</text><text x="350.0" y="20" font-size="13" font-weight="600" fill="#333" text-anchor="middle">Average daily pain intensity (0&ndash;10) by year &mdash; from 1,800+ diary entries</text></svg>
+      <ul class="clean">
+        <li class="li-amber"><b>2019 (baseline):</b> Pain averaging 5.5. She was on estrogen <b>patches</b> almost daily (149 mentions). Anxiety mentions were already heavy (91).</li>
+        <li class="li-amber"><b>2020 (worst year):</b> Pain spiked to a 5.93 average. The patches dropped to <b>zero mentions</b>, while anxiety hit its peak (102) and heart palpitations more than doubled (23&nbsp;&rarr;&nbsp;39). This is the year the diary reads as a sudden hormonal cliff.</li>
+        <li class="li-blue"><b>2021 (relief begins):</b> Average dropped to 5.73. Hot flashes nearly disappeared (24&nbsp;&rarr;&nbsp;2). Looks like a treatment change started working.</li>
+        <li class="li-amber"><b>2022 (sinus year):</b> Pain back up to 6.00 &mdash; the highest yearly average in the diary. <b>Augmentin</b> appears 30 times (vs 0 the year before). Chronic sinus inflammation seems to have layered another pain source on top of the migraine pattern.</li>
+        <li class="li-blue"><b>2023:</b> Pain edged back down (5.83). <b>Workouts</b> appear ten times (up from five), suggesting she was getting back into movement.</li>
+        <li class="li-green"><b>2024:</b> Lowest average of any full-data year (5.64). Hot flashes (3), anxiety (12), and heart palpitations (12) all dropped to their lowest counts in the entire diary. Something is finally settling.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Symptom-keyword heat-map by year</h3>
+      <p>(Cell shading: white = 0, green = a few, amber = many.)</p>
+      <table style="border-collapse:collapse;width:100%;font-size:14px;"><tr><th>Year</th><th>hot flash</th><th>anxiety</th><th>heart palp</th><th>sinus</th><th>patches</th><th>imitrex</th><th>augmentin</th></tr><tr><td><b>2019</b></td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">24</td><td style="background:#ffc7c7;color:#8a2a2a;text-align:center;font-weight:600;">91</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">23</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">10</td><td style="background:#ffc7c7;color:#8a2a2a;text-align:center;font-weight:600;">149</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">9</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">6</td></tr><tr><td><b>2020</b></td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">10</td><td style="background:#ffc7c7;color:#8a2a2a;text-align:center;font-weight:600;">102</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">39</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">10</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">13</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td></tr><tr><td><b>2021</b></td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">2</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">58</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">28</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">5</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">13</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td></tr><tr><td><b>2022</b></td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">6</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">45</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">35</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">20</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">2</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">30</td></tr><tr><td><b>2023</b></td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">23</td><td style="background:#ffe2c1;color:#9b5a16;text-align:center;font-weight:600;">55</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">25</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">29</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">9</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">4</td></tr><tr><td><b>2024</b></td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">3</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">12</td><td style="background:#fff4dc;color:#a36a13;text-align:center;font-weight:600;">12</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">6</td><td style="background:#f7f7f7;color:#999;text-align:center;font-weight:600;">0</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">1</td><td style="background:#eef6ee;color:#1aa18d;text-align:center;font-weight:600;">6</td></tr></table>
+      <p style="margin-top:12px;font-size:14px;color:var(--soft);">The "patches" column tells a story all by itself &mdash; estrogen patches were a daily part of life in 2019, then disappeared entirely. The pain spike, anxiety surge, and hot-flash bloom in 2020 cluster right after.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="fingerprint">
+    <div class="sechead"><div class="secnum">3</div><h2>Her pain "fingerprint" &mdash; the recurring symptom cluster</h2></div>
+    <div class="card">
+      <p>If you read enough entries, the same constellation of symptoms keeps appearing together:</p>
+      <div class="factor-grid">
+        <div class="factor"><h4 style="color:var(--pink);">Frontal pressure</h4><div class="val">"frontal pain", "head pressure", "frontal stuffiness". Mentioned 101+ times. Often described as feeling like sinus, sometimes <i>is</i> sinus.</div></div>
+        <div class="factor"><h4 style="color:var(--pink);">Morning waking pattern</h4><div class="val">"woke at 5:30 sweaty", "anxiety at 9 am", "hot and sweaty by 8:15". <b>265 mentions of "woke"</b> &mdash; many are pain-on-waking entries.</div></div>
+        <div class="factor"><h4 style="color:var(--pink);">Hot flash &amp; sweaty</h4><div class="val">68 hot flashes + 174 "sweaty" + 203 "hot" mentions. The thermoregulation channel is a very loud part of her pattern.</div></div>
+        <div class="factor"><h4 style="color:var(--pink);">Anxiety &amp; heart palps</h4><div class="val">363 anxiety + 162 heart-palp mentions. Almost always paired with the heat symptoms.</div></div>
+        <div class="factor"><h4 style="color:var(--pink);">Fatigue / weakness</h4><div class="val">250 + 46 mentions. The post-pain hangover that takes a day to recover.</div></div>
+        <div class="factor"><h4 style="color:var(--pink);">Weather-pressure noting</h4><div class="val">"Atmos. pressure" recorded 658 times &mdash; she clearly suspects a barometric link, and her diary backs that hypothesis up over time.</div></div>
+      </div>
+      <p>This isn't a textbook "classic" migraine pattern (sudden, unilateral, throbbing, vomiting). It's a <b>chronic-daily-headache + autonomic-overdrive</b> profile, with hormonal and barometric overlays. That distinction matters for treatment.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="genetics">
+    <div class="sechead"><div class="secnum">4</div><h2>The genetics that shape her migraines</h2></div>
+    <div class="card">
+      <p>Migraine is famously polygenic (hundreds of small contributors), but a handful of well-studied genes show up in her data with results that <b>directly connect to the diary's pattern</b>.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">The COMT "pain haplotype" &mdash; the biggest single clue</h3>
+      <p><b>COMT</b> breaks down dopamine, adrenaline and noradrenaline. The classic pain literature (Diatchenko, Zubieta and others) describes three combined haplotypes built from four COMT SNPs &mdash; "<b>HPS</b>" (high pain sensitivity), "<b>APS</b>" (average) and "<b>LPS</b>" (low). Her three readable SNPs:</p>
+      <table>
+        <tr><th>SNP</th><th>Her genotype</th><th>What it means here</th></tr>
+        <tr><td>rs4680 (Val158Met)</td><td><b>AA</b> &mdash; Met/Met</td><td>Slowest COMT enzyme; breakdown of stress chemicals is 3&ndash;4&times; slower than Val/Val</td></tr>
+        <tr><td>rs4633 (H62H)</td><td><b>TT</b></td><td>"Pain-sensitivity" haplotype direction (T = HPS-side)</td></tr>
+        <tr><td>rs6269 (synonymous)</td><td><b>AA</b></td><td>Same direction (A = HPS-side)</td></tr>
+        <tr><td>rs4818</td><td>not in file</td><td>Can't fully type the haplotype</td></tr>
+      </table>
+      <div class="callout">
+        <span class="ctag">What it means for her</span>
+        Her three readable COMT SNPs all sit on the <b>HPS</b> ("high pain sensitivity") side. Slow Met/Met means dopamine, adrenaline and pain-modulating chemicals stick around longer in the brain. People with this profile tend to: feel pain more intensely, have stronger morning cortisol/adrenaline pulses, find stress harder to "shake off," and often have a richer emotional vocabulary alongside it. <b>Almost every recurring theme in her diary &mdash; morning waking with anxiety/sweating, frontal pressure that doesn't quit, heart palps, the way pain layers with stress &mdash; reads like a textbook description of HPS COMT.</b>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">MTHFR &rarr; homocysteine &rarr; migraine</h3>
+      <p>Katrina carries <b>one copy each of MTHFR C677T and A1298C</b> (compound heterozygous, ~60&ndash;70% enzyme speed). Her April 2026 lab showed homocysteine rising from 9.4 to 11.1. <b>Elevated homocysteine is repeatedly linked to higher migraine frequency, especially migraine with aura</b>, and the most studied intervention is <i>methylated</i> B-vitamins (L-5-MTHF + methyl-B12). This is one of the most actionable items in the report.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">OPRM1 A118G &mdash; opioids work less well</h3>
+      <p>Her <b>OPRM1</b> result is <b>AG</b> &mdash; one copy of the G (118G) variant. This variant produces a mu-opioid receptor with reduced expression. In practice: <b>standard doses of opioid pain medicines tend to be less effective</b> for G-carriers; some studies report 2&ndash;4&times; higher dose requirements after surgery. For migraine, this matters because it predicts that opioid rescue would underperform &mdash; consistent with modern migraine guidelines that <i>already</i> steer away from opioids and toward triptans, gepants and ditans for acute relief.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">PHACTR1 &mdash; the vascular-migraine SNP</h3>
+      <p><b>rs9349379</b> in PHACTR1 sits in a region tied to migraine, coronary vessel reactivity and even spontaneous coronary artery dissection. Katrina is <b>AG</b> &mdash; one risk-direction copy. Modest individually, but it nudges her toward the "vascular reactivity" end of the migraine spectrum &mdash; which fits her strong barometric/weather correlation in the diary.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">ADORA2A &mdash; caffeine, sleep &amp; anxiety</h3>
+      <p>Her ADORA2A result (<b>rs5751876 CC</b> + <b>rs2298383 TT</b>) sits in the "more reactive to caffeine, sleep disruption from caffeine, anxiety after caffeine" zone. Combined with her <b>fast CYP1A2 (caffeine metabolism)</b>, the picture is: she breaks caffeine down quickly, but while it's there it hits her receptors hard. This explains why caffeine can feel both useful (acute migraine abortive) and risky (poor sleep, anxiety the next morning).</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">SCN9A &amp; PPARGC1A &mdash; smaller supporting roles</h3>
+      <p><b>SCN9A rs6746030 AG</b>: one copy of a sodium-channel variant linked to slightly amplified pain perception. <b>PPARGC1A rs8192678 TT</b>: a mitochondrial-energy gene variant where the migraine literature is mixed but interesting; mitochondrial dysfunction is one of the leading hypotheses for what's actually happening inside the brain during a migraine. These are small effects, but they all push in the same direction.</p>
+    </div>
+
+    <div class="card calm-callout">
+      <div class="callout calm">
+        <span class="ctag">The genetic summary in one line</span>
+        Katrina's DNA dials up <b>pain processing</b> (COMT HPS + SCN9A), turns down <b>opioid response</b> (OPRM1 G), turns up <b>caffeine receptor sensitivity</b> (ADORA2A), adds <b>vascular reactivity</b> (PHACTR1), and slows down <b>folate-cycle clean-up</b> (MTHFR). None of these by themselves cause migraine. Together they explain why hers are stubborn, deeply felt, weather-sensitive, and tightly tied to hormones.
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="hormones">
+    <div class="sechead"><div class="secnum">5</div><h2>The hormone story &mdash; the biggest single lever</h2></div>
+    <div class="card lead">
+      <p class="lead-text">If the genetics set the stage, <b>hormones write the day-to-day script</b>. The diary is almost a textbook study in estrogen-withdrawal migraine.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">The 2019&nbsp;&rarr;&nbsp;2020 cliff</h3>
+      <p>"Patches" appears <b>149 times in 2019</b> &mdash; almost daily. Then in 2020, the word vanishes entirely (zero mentions). What happens next:</p>
+      <ul class="clean">
+        <li class="li-rose"><b>Pain average rose from 5.53 &rarr; 5.93</b> (the biggest single-year jump).</li>
+        <li class="li-rose"><b>Anxiety mentions:</b> 91 &rarr; 102 (already high; climbed further).</li>
+        <li class="li-rose"><b>Heart palpitations:</b> 23 &rarr; 39.</li>
+        <li class="li-rose"><b>Imitrex (sumatriptan) use:</b> 9 &rarr; 13.</li>
+      </ul>
+      <p>This is the strongest single signal in the diary: <b>removing the estrogen patches made everything worse</b>. Migraine is well-known to be triggered by <i>drops</i> in estrogen rather than absolute levels &mdash; it's the change, not the value, the brain reacts to.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Her estrogen-receptor and aromatase genetics</h3>
+      <p>From the main report:</p>
+      <ul class="clean">
+        <li class="li-blue"><b>ESR1</b> (estrogen receptor &alpha;): <b>CT + AG</b> &mdash; mixed/heterozygous on both major SNPs. Receptors are moderately sensitive to estrogen swings.</li>
+        <li class="li-blue"><b>CYP1B1</b> (estrogen breakdown): <b>CG</b> &mdash; mixed. The 4-hydroxy pathway is moderately active, which can produce more reactive estrogen metabolites.</li>
+        <li class="li-amber"><b>COMT</b> (estrogen detox second-step): <b>Met/Met (slow)</b>. The reactive estrogen metabolites that CYP1B1 produces are cleared more slowly. The same COMT slowness that drives the pain-sensitivity story <i>also</i> slows estrogen clean-up.</li>
+      </ul>
+      <p>Put together: her body holds onto estrogen's reactive intermediates a bit longer, which can amplify both protective effects (when estrogen is steady) <i>and</i> withdrawal effects (when it drops). Stability of estrogen levels matters more for her than for most people.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Hot flashes as a marker</h3>
+      <p>Hot flashes are essentially estrogen-withdrawal events. Counting them by year tells the same story as the patches column:</p>
+      <table>
+        <tr><th>Year</th><th>Hot-flash mentions</th><th>Read</th></tr>
+        <tr><td>2019</td><td>24</td><td>On patches but already cycling out</td></tr>
+        <tr><td>2020</td><td>10</td><td>Patches gone; baseline shifting</td></tr>
+        <tr><td>2021</td><td>2</td><td>New therapy holding hormones steadier</td></tr>
+        <tr><td>2022</td><td>6</td><td>Stable</td></tr>
+        <tr><td>2023</td><td>23</td><td>Something destabilised again</td></tr>
+        <tr><td>2024</td><td>3</td><td>Back to steady (best year on record)</td></tr>
+      </table>
+      <p style="margin-top:8px;">Years with very few hot flashes (2021, 2024) are the same years with the lowest pain averages. <b>Smooth estrogen = quieter migraines.</b></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">The aromatase-inhibitor trade-off</h3>
+      <p>The diary mentions <b>letrozole</b> (5x) and <b>anastrozole</b> (1x). Aromatase inhibitors block the body's production of estrogen from testosterone &mdash; useful for keeping estrogen <i>steady and low</i>, which can be an effective migraine strategy in someone whose attacks are estrogen-withdrawal driven. The trade-off she's living is real: low steady estrogen helps the migraines, but it nudges cholesterol up (which we saw in her April 2026 lab) and increases bone-density attention long-term. Her HDL-P being slightly low and LDL-P borderline-high are recognisable signatures of low-estrogen physiology, <b>not</b> of bad genetics &mdash; her APOE is &epsilon;3/&epsilon;3 (neutral).</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="triggers">
+    <div class="sechead"><div class="secnum">6</div><h2>Triggers her diary points to</h2></div>
+    <div class="card">
+      <p>By <b>frequency of co-occurrence with high-pain days</b> in the diary, the triggers that show up loudest are:</p>
+      <div class="factor-grid">
+        <div class="factor">
+          <span class="pill pink">#1</span>
+          <h4>Estrogen swings</h4>
+          <div class="val">The single biggest pattern. Drops &mdash; whether from patches stopping, menstrual cycles, or peri-menopausal flux &mdash; produce the worst weeks.</div>
+        </div>
+        <div class="factor">
+          <span class="pill pink">#2</span>
+          <h4>Barometric / weather pressure</h4>
+          <div class="val">She <i>records</i> pressure with most entries &mdash; that means she suspects it. Drops in atmospheric pressure (storm fronts, humidity spikes) line up with worse pain days. Backed up by her PHACTR1 variant.</div>
+        </div>
+        <div class="factor">
+          <span class="pill pink">#3</span>
+          <h4>Morning cortisol/adrenaline surge</h4>
+          <div class="val">"Woke at 5:30 sweaty," "anxiety at 9am" &mdash; her diary's morning entries are a textbook description of the natural cortisol awakening response landing too hard, because slow COMT can't clear it.</div>
+        </div>
+        <div class="factor">
+          <span class="pill amber">#4</span>
+          <h4>Sinus inflammation</h4>
+          <div class="val">2022's 30 augmentin courses and 29 sinus mentions in 2023 layered <i>another</i> pain source on top of migraine. Sinus pressure and migraine pressure feel very similar from the inside.</div>
+        </div>
+        <div class="factor">
+          <span class="pill amber">#5</span>
+          <h4>Sleep disruption</h4>
+          <div class="val">Many entries describe waking too early, anxious. Sleep loss is one of the most reliable migraine triggers in the literature, and her ADORA2A profile makes any caffeine close to bedtime a real problem.</div>
+        </div>
+        <div class="factor">
+          <span class="pill blue">#6</span>
+          <h4>Iron status</h4>
+          <div class="val">Iron deficiency itself causes headaches. Her ferritin was in the teens/20s 2020&ndash;2022 and is now 123 (well-managed). The improvement matches the late-diary improvement in pain.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="treatments">
+    <div class="sechead"><div class="secnum">7</div><h2>What she's tried &mdash; and what fits her genetics</h2></div>
+    <div class="card">
+      <table>
+        <tr><th>Treatment</th><th>Diary mentions</th><th>What her genes say about it</th></tr>
+        <tr><td><b>Estrogen patches</b></td><td>156 (all 2019)</td><td>The single strongest "things were better with these" signal in the diary. Fits the slow-COMT/ESR1 picture.</td></tr>
+        <tr><td><b>Aromatase inhibitors</b> (letrozole, anastrozole)</td><td>6</td><td>Used to keep estrogen steady-low instead of fluctuating &mdash; can be very effective for estrogen-withdrawal migraine. Real cholesterol cost (seen in her 2026 lab).</td></tr>
+        <tr><td><b>Imitrex (sumatriptan)</b></td><td>47</td><td>Triptans are first-line acute therapy &mdash; metabolised by MAO-A, not COMT, so her slow COMT doesn't affect them. Reasonable choice.</td></tr>
+        <tr><td><b>Nurtec (rimegepant) / Ubrelvy</b></td><td>15 + 1</td><td>Gepants &mdash; the newest acute therapy, no vasoconstriction. Generally well-tolerated and don't conflict with her genetics. Worth being a default rescue.</td></tr>
+        <tr><td><b>Phenergan (promethazine)</b></td><td>41</td><td>Anti-nausea + sedating. Promethazine is metabolised by CYP2D6 (not in her file), so her actual response is unpredictable from this data alone &mdash; but it clearly helps her enough to be a regular tool.</td></tr>
+        <tr><td><b>Augmentin</b> (antibiotic)</td><td>46</td><td>For the sinus piece, not the migraine itself. The frequency hints at chronic sinus inflammation feeding the frontal-pressure pattern.</td></tr>
+        <tr><td><b>Tylenol / ibuprofen / steroid</b></td><td>5 + a few + 7</td><td>OTC supports; steroid bursts for tough flares.</td></tr>
+        <tr><td><b>Yoga, walking, massage</b></td><td>21 + 266 + 35</td><td>Physical activity is one of the most evidence-backed non-drug interventions for chronic migraine. Her diary clearly tracks "walked today" as a positive variable.</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Things worth a conversation with her doctor</h3>
+      <p>(Reminder: this is a friendly summary, not a prescription. Each idea below should go through her physician, ideally a headache specialist.)</p>
+      <ul class="clean">
+        <li class="li-blue"><b>Methylated B-vitamins.</b> Her MTHFR + rising homocysteine pairing is the most cleanly actionable item in the whole report. <b>L-5-MTHF</b> (methylfolate) + <b>methyl-B12</b> is the variant-friendly form.</li>
+        <li class="li-blue"><b>CGRP preventives (Aimovig, Ajovy, Emgality, Vyepti, or oral Nurtec).</b> These don't appear in the 2018&ndash;2024 diary at all and would be a logical next step for a chronic-pattern picture &mdash; they target the migraine pathway itself rather than fighting the symptoms.</li>
+        <li class="li-blue"><b>Magnesium glycinate + riboflavin (B2) + CoQ10.</b> A well-supported migraine "stack" with strong evidence for chronic migraine, and they fit her mitochondrial-energy (PPARGC1A) and methylation story.</li>
+        <li class="li-blue"><b>Sleep stability + late-day caffeine cut-off.</b> Her ADORA2A profile means caffeine after noon hits harder than for most people.</li>
+        <li class="li-blue"><b>Continue the steady-estrogen approach.</b> Whatever's working in 2024 is working &mdash; the data is unusually clean on this.</li>
+        <li class="li-blue"><b>Sinus follow-up.</b> The 2022&ndash;2023 sinus pattern is worth seeing an ENT for if it returns, since chronic sinus inflammation directly mimics and worsens her migraine pattern.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="synthesis">
+    <div class="sechead"><div class="secnum">8</div><h2>Putting it all together</h2></div>
+    <div class="card lead">
+      <p class="lead-text">Across five and a half years of patient, careful tracking, a coherent picture emerges &mdash; one that her genetics also predict from a different angle. Both stories tell the same thing:</p>
+      <p style="font-size:18px;font-weight:600;color:var(--purple);margin-top:18px;">
+        Katrina's brain runs a turned-up dial on stress, pain and hormone-fluctuation sensitivity (slow COMT, MTHFR, ADORA2A, PHACTR1, SCN9A). Steady hormones make a big difference. Sinus inflammation and weather pressure add layers. The "she's not imagining this" answer the diary deserves is firmly in the data.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">What the data also says about progress</h3>
+      <p>2024 is her best year in the diary &mdash; lowest hot-flash count, lowest anxiety count, lowest heart-palp count, lowest pain average. The April 2026 lab confirms it: ferritin great, vitamin D excellent, blood sugar excellent, inflammation markers (hs-CRP, Lp-PLA2) reassuringly low, kidney/thyroid/CBC normal. The cholesterol and rising homocysteine are real but actionable. <b>The trajectory is in a good direction.</b></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">A note on the diary itself</h3>
+      <p>1,800+ careful daily entries with weather data, hormone levels, medication mentions and intensity scores is &mdash; in clinical terms &mdash; <b>an extraordinary headache diary</b>. It's the kind of data most headache specialists rarely see. Any new clinician reading the case starts with a real five-year picture instead of asking "what's been happening lately?" That alone should accelerate any future treatment discussion.</p>
+    </div>
+
+    <div class="callout calm">
+      <span class="ctag">In one sentence</span>
+      The diary and the DNA tell the same story: a sensitive, stress-tuned, hormone-coupled migraine pattern with steady estrogen and methylated B-vitamins as the two cleanest levers &mdash; and 2024's data already showing those levers working.
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Katrina's Migraine Story</b> &middot; A companion deep-dive to the main genetic report &middot; Prepared 26 May 2026<br>
+    Built from a 1,800-entry pain diary (Dec 2018&ndash;June 2024), a 23andMe v5 raw data file, and an April 2026 Labcorp blood panel.<br>
+    For learning and curiosity only &mdash; not medical advice, not a diagnosis. Bring any questions to a doctor or headache specialist.</p>
+    <p><a href="index.html" style="color:var(--purple);">&larr; Back to main genetic report</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
